@@ -25,5 +25,5 @@ dao=UsuariosDao()
 if(dao.consultar(email,contraseña) is None):
     if(dao.registrar(usuario)):
         print('{"tipo":"OK","mensaje":"Usuario creado"}')
-    else:
-        print('{"tipo":"error","mensaje":"Ya existe un usuario con esa identificación o con ese correo"}')
+else:
+    print('{"tipo":"error","mensaje":"Ya existe un usuario con esa identificación o con ese correo"}')
