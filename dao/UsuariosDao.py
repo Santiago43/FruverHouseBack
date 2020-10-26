@@ -1,8 +1,7 @@
 import mysql.connector
 from mysql.connector import errorcode
-from dao import dao
-from modelo import Persona
-from modelo import Usuario
+from dao.dao import dao
+from models import Usuario
 """
 import sys
 sys.path

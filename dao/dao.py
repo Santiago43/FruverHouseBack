@@ -1,6 +1,6 @@
 import mysql.connector
 from mysql.connector import errorcode
-class dao():
+class dao:
     """
     docstring
     """

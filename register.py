@@ -2,7 +2,7 @@
 import mysql.connector
 from mysql.connector import errorcode
 from dao.UsuariosDao import UsuariosDao
-from dao.modelo.Usuario import Usuario
+from dao.models import Usuario
 import cgi
 
 print('Content-Type: text/json')
@@ -22,7 +22,7 @@ direccion=datos.getvalue('direccion')
 
 usuario=Usuario(cedula,primerNombre,segundoNombre,primerApellido,segundoApellido,email,contraseña,telefono,direccion)
 dao=UsuariosDao()
-if(dao.consultar(usuario.email,usuario.password) is None):
+if(dao.consultar(email,contraseña) is None):
     if(dao.registrar(usuario)):
         print('{"mensaje":"Usuario creado"}')
     else:
