@@ -15,7 +15,7 @@ class UsuariosDao(dao):
         try:
             cnx = super().connectDB()
             cursor = cnx.cursor()
-            args=[usuario.cedula,usuario.primerNombre,usuario.segundoNombre,usuario.primerApellido,usuario.segundoApellido,usuario.direccionResidencia,usuario.email,usuario.telefono,usuario.contraseña]
+            args=[usuario.cedula,usuario.primerNombre,usuario.segundoNombre,usuario.primerApellido,usuario.segundoApellido,usuario.direccion,usuario.email,usuario.telefono,usuario.contraseña]
             cursor.callproc("crearUsuario",args)
             cursor.commit()
             cursor.close()
