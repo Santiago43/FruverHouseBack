@@ -15,8 +15,9 @@ CREATE TABLE PERSONA (
   primerApellido VARCHAR(40) NULL,
   segundoApellido VARCHAR(40) NULL,
   direccionResidencia VARCHAR(50) NULL,
-  email VARCHAR(60) NULL,
+  email VARCHAR(60) NOT NULL,
   telefono VARCHAR(15) NULL,
+  contraseña VARCHAR(200) NOT NULL,
   PRIMARY KEY(idPERSONA)
 );
 
