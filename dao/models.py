@@ -10,7 +10,6 @@ class Persona:
         self.direccion=direccion
         self.cedula=cedula
     
-
 class Administrador(Persona):
     def __init__(self,cedula,primerNombre, segundoNombre, primerApellido, segundoApellido, email, contraseña,telefono, direccion,permisos):
         Persona.__init__(self,cedula,primerNombre, segundoNombre, primerApellido, segundoApellido, email, contraseña,telefono, direccion)
