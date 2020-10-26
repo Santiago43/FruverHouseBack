@@ -1,7 +1,12 @@
 import mysql.connector
 from mysql.connector import errorcode
 from dao import dao
-from FruverHouseBack.modelo.usuarios import Usuario
+from modelo.usuarios import Usuario 
+"""
+import sys
+sys.path
+sys.path.append('/FruverHouseBack/modelo/usuarios.py')
+"""
 class UsuariosDao(dao):
     """
     docstring
@@ -30,16 +35,16 @@ class UsuariosDao(dao):
             sql = "select * from PERSONA where email='"+email+"'and contraseña=sha('"+password+"');"
             cursor.execute(sql)
             for row in cursor:
-                usuario = Usuario()
-                usuario.cedula=row[0]
-                usuario.primerNombre=row[1]
-                usuario.segundoNombre=row[2]
-                usuario.primerApellido=row[3]
-                usuario.segundoApellido=row[4]
-                usuario.direccion=row[5]
-                usuario.email=row[6]
-                usuario.contraseña=row[7]
-                usuario.telefono=row[8]
+                cedula=row[0]
+                primerNombre=row[1]
+                segundoNombre=row[2]
+                primerApellido=row[3]
+                segundoApellido=row[4]
+                direccion=row[5]
+                email=row[6]
+                contraseña=row[7]
+                telefono=row[8]
+                usuario=Usuario(cedula,primerNombre,primerApellido,segundoNombre,segundoApellido,direccion,email,contraseña,telefono)
             cursor.close()
             cnx.close()
             return usuario
