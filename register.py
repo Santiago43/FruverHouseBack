@@ -2,7 +2,7 @@
 import mysql.connector
 from mysql.connector import errorcode
 from dao.UsuariosDao import UsuariosDao
-from dao.modelo.usuarios import Usuario
+from dao.modelo.Usuario import Usuario
 import cgi
 
 print('Content-Type: text/json')
