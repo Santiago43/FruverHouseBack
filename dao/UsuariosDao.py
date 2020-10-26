@@ -15,10 +15,8 @@ class UsuariosDao(dao):
         try:
             cnx = super().connectDB()
             cursor = cnx.cursor()
-            sql = "insert into PERSONA (idPERSONA,primerNombre,segundoNombre,primerApellido,segundoApellido, direccionResidencia,email,contraseña,telefono) values(%s,%s,%s,%s,%s,%s,%s,%s,%s);"
-            cursor.execute(sql,(usuario.cedula,usuario.primerNombre,usuario.segundoNombre,usuario.primerApellido,usuario.segundoApellido,usuario.direccion,usuario.email,usuario.contraseña,usuario.telefono))
-            sql2 = "insert into USUARIO (PERSONA_idPERSONA) values (%s);"
-            cursor.execute(sql2,(usuario.cedula))
+            args=[usuario.cedula,usuario.primerNombre,usuario.segundoNombre,usuario.primerApellido,usuario.segundoApellido,usuario.direccionResidencia,usuario.email,usuario.telefono,usuario.contraseña]
+            cursor.callproc("crearUsuario",args)
             cursor.commit()
             cursor.close()
             cnx.close()
