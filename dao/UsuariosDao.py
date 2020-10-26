@@ -18,7 +18,7 @@ class UsuariosDao(dao):
             sql = "insert into PERSONA (idPERSONA,primerNombre,segundoNombre,primerApellido,segundoApellido, direccionResidencia,email,contraseña,telefono) values(%s,%s,%s,%s,%s,%s,%s,%s,%s);"
             cursor.execute(sql,(usuario.cedula,usuario.primerNombre,usuario.segundoNombre,usuario.primerApellido,usuario.segundoApellido,usuario.direccion,usuario.email,usuario.contraseña,usuario.telefono))
             sql2 = "insert into USUARIO (PERSONA_idPERSONA) values (%s)"
-            cursor.execute(sql2,usuario.cedula)
+            cursor.execute(sql2,(usuario.cedula))
             cursor.commit()
             cursor.close()
             cnx.close()
