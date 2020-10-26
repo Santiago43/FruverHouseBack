@@ -24,6 +24,6 @@ usuario=Usuario(cedula,primerNombre,segundoNombre,primerApellido,segundoApellido
 dao=UsuariosDao()
 if(dao.consultar(email,contraseña) is None):
     if(dao.registrar(usuario)):
-        print('{"mensaje":"Usuario creado"}')
+        print('{"tipo":"OK","mensaje":"Usuario creado"}')
     else:
-        print('{"mensaje":"Ese usuario ya existe"}')
+        print('{"tipo":"error","mensaje":"Ese usuario ya existe"}')
