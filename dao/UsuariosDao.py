@@ -37,6 +37,7 @@ class UsuariosDao(dao):
             cursor = cnx.cursor()
             sql = "select p.* from PERSONA as p inner join USUARIO as u on p.idPERSONA=u.PERSONA_idPERSONA where p.email='"+email+"' and p.contraseña=sha('"+password+"');"
             cursor.execute(sql)
+            usuario=None
             for row in cursor:
                 cedula=row[0]
                 primerNombre=row[1]
