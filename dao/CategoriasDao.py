@@ -48,14 +48,14 @@ class CategoriasDao(dao):
             elif err.errno == errorcode.ER_BAD_DB_ERROR:
                 print("Database does not exist")
             return None
-            
+
     def listarTodos(self):
+        categorias=[]
         try:
             cnx = super().connectDB()
             cursor = cnx.cursor()
             sql = "select * from categoria;"
             cursor.execute(sql)
-            categorias=[]
             for row in cursor:
                 categoria=Categoria(row[1],row[2])
                 categoria.idCategoria=row[0]
