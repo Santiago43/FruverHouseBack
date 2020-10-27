@@ -1,4 +1,4 @@
-#!usr/bin/python3
+#!/usr/bin/python3
 import mysql.connector
 from mysql.connector import errorcode
 from dao.UsuariosDao import UsuariosDao
