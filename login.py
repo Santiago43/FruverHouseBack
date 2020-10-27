@@ -20,4 +20,4 @@ usuario = dao.consultar(email,contraseña)
 if(usuario is not None):
     print('{"tipo":"OK","mensaje","Bienvenido/a, '+usuario.primerNombre+'"}')
 else:
-    print('{"tipo":"error","mensaje":"Usuario o contraseña inválidos"}')
+    print('{"tipo":"error","mensaje":"Usuario o contrasena invlidos"}')
