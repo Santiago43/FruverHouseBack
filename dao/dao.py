@@ -5,8 +5,8 @@ class dao:
     docstring
     """
     def __init__(self):
-        self.user='root'
-        self.password='1234'
+        self.user='santiago'
+        self.password='admin1234'
         self.database='fruverhouse'
         self.host='127.0.0.1'
     def connectDB(self):
