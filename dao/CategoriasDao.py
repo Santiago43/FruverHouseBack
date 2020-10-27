@@ -54,7 +54,7 @@ class CategoriasDao(dao):
         try:
             cnx = super().connectDB()
             cursor = cnx.cursor()
-            sql = "select * from categoria;"
+            sql = "select * from CATEGORIA;"
             cursor.execute(sql)
             for row in cursor:
                 categoria=Categoria(row[1],row[2])
@@ -62,7 +62,6 @@ class CategoriasDao(dao):
                 categorias.append(categoria)
             cursor.close()
             cnx.close()
-            return categorias
         except mysql.connector.Error as err:
             if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
                 print("Something is wrong with your user name or password")
@@ -71,3 +70,4 @@ class CategoriasDao(dao):
             else:
                 print(err)
             return None
+        return categorias
