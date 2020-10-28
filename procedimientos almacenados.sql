@@ -18,4 +18,4 @@ values(_cedula,_primerNombre,_segundoNombre,_primerApellido,_segundoApellido,_di
 insert into USUARIO (PERSONA_idPERSONA)values (_cedula);
 end $$
 
-drop procedure crearUsuario;
+#drop procedure crearUsuario;

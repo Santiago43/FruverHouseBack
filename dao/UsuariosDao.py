@@ -2,14 +2,9 @@ import mysql.connector
 from mysql.connector import errorcode
 from dao.dao import dao
 from dao.models import Usuario
-"""
-import sys
-sys.path
-sys.path.append('/FruverHouseBack/modelo/usuarios.py')
-"""
 class UsuariosDao(dao):
     """
-    docstring
+    Clase de objeto de acceso a datos de los usuarios
     """
     def registrar(self,usuario):
         try:
@@ -29,7 +24,17 @@ class UsuariosDao(dao):
             else:
                 print(err)
             return False
+
     def consultar(self,email,password):
+        """
+        Método encargado de consultar los datos de un usuario a partir de su correo y su contraseña.
+
+        Parámetros:
+
+        email -- que es el correo del usuario
+        
+        password -- que es la contraseña del usuario
+        """
         try:
             cnx = super().connectDB()
             cursor = cnx.cursor()
@@ -56,3 +61,26 @@ class UsuariosDao(dao):
             elif err.errno == errorcode.ER_BAD_DB_ERROR:
                 print("Database does not exist")
             return None
+
+    def actualizar(self,usuario):
+        """
+        Método que actualiza los datos de un usuario
+        Parámetros:
+        usuario - que es el usuario que se va a actualizar en la base de datos
+        """
+        try:
+            cnx = super().connectDB()
+            cursor = cnx.cursor()
+            sql = "update PERSONA set primerNombre='"+usuario.primerNombre+"', segundoNombre='"+usuario.segundoNombre+"', primerApellido='"+usuario.primerApellido+"', segundoApellido='"+usuario.segundoApellido+"',direccionResidencia='"+usuario.direccion+"',email='"+usuario.email+"', telefono='"+usuario.telefono+"', contraseña=sha('"+usuario.contraseña+"') where idPERSONA= '"+usuario.cedula+"';"
+            cursor.execute(sql)
+            cnx.commit()
+            cursor.close()
+            cnx.close()
+            return usuario
+        except mysql.connector.Error as err:
+            if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
+                print("Something is wrong with your user name or password")
+            elif err.errno == errorcode.ER_BAD_DB_ERROR:
+                print("Database does not exist")
+            return None
+    
