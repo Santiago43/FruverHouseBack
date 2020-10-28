@@ -38,7 +38,7 @@ elif os.environ['REQUEST_METHOD']=="DELETE":
     dao=CategoriasDao()
     categoria = dao.consultar(datos.getvalue('id'))
     if categoria is None:
-        print('{"tipo":"error", "mensaje":"Esa categoría no existe"}')
+        print(json.dumps('{"tipo":"error", "mensaje":"Esa categoría no existe"}'))
     else:
         if dao.eliminar(categoria):
             print('{"tipo":"OK", "mensaje":"Categoría eliminada"}')
