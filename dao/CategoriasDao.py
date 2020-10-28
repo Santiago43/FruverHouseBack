@@ -84,7 +84,7 @@ class CategoriasDao(dao):
         try:
             cnx = super().connectDB()
             cursor = cnx.cursor()
-            sql = "delete from CATEGORIA where idCATEGORIA="+categoria.idCategoria+"; "
+            sql = "delete from CATEGORIA where idCATEGORIA="+str(categoria.idCategoria)+"; "
             cursor.execute(sql)
             cnx.commit()
             cursor.close()
