@@ -7,3 +7,6 @@ call crearUsuario('12345','Antonio','','Perez','','Callefalsa123','antonio@examp
 
 insert into categoria (nombre,imagen) values ('Tubérculos','/imagen/img.jpg');
 insert into categoria (nombre,imagen) values ('Hortalizas','/imagen/img.jpg');
+
+insert into PRODUCTO (CATEGORIA_idCATEGORIA,nombre,unidad,precio,imagen) 
+values (1,"Papa pastusa","libra",500,"/imagen/img.jpg")

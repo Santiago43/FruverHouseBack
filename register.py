@@ -3,6 +3,7 @@ import mysql.connector
 from mysql.connector import errorcode
 from dao.UsuariosDao import UsuariosDao
 from dao.models import Usuario
+import json
 import cgi
 import os
 
@@ -25,8 +26,8 @@ if os.environ['REQUEST_METHOD']=="POST":
     dao=UsuariosDao()
     if(dao.consultar(email,contraseña) is None):
         if(dao.registrar(usuario)):
-            print('{"tipo":"OK","mensaje":"Usuario creado"}')
+            print(json.dumps('{"tipo":"OK","mensaje":"Usuario creado"}'))
         else:
-            print('{"tipo":"error","mensaje":"Error al crear usuario"}')
+            print(json.dumps('{"tipo":"error","mensaje":"Error al crear usuario"}'))
     else:
-        print('{"tipo":"error","mensaje":"Ya existe un usuario con esa identificación o con ese correo"}')
+        print(json.dumps('{"tipo":"error","mensaje":"Ya existe un usuario con esa identificación o con ese correo"}'))

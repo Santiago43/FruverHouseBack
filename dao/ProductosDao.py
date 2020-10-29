@@ -1,23 +1,25 @@
 import mysql.connector
 from mysql.connector import errorcode
 from dao.dao import dao
-from dao.models import Categoria
+from dao.models import Producto
 
-class CategoriasDao(dao):
+class ProductosDao(dao):
     """
-    Clase de objeto de acceso a datos de las categorías
+    Clase de objeto de acceso a datos de los productos
     """
     
-    def registrar(self,categoria):
-        """ Se almacena en la base de datos una categoria
+    def registrar(self,producto):
+        """ Se almacena en la base de datos un producto
+
         Parámetros
-        categoria --- que es la categoría que se almacenará
+        
+        producto --- que es el producto que se almacenará
         """
         try:
             cnx = super().connectDB()
             cursor = cnx.cursor()
-            sql = "insert into categoria (nombre,imagen) values ('"+categoria.nombre+"','"+categoria.imagen+"');"
-            cursor.execute(sql)
+            sql = "insert into PRODUCTO (CATEGORIA_idCATEGORIA,nombre,unidad,precio,imagen)  values (%s,%s,%s,%s,%s);"
+            cursor.execute(sql,(producto.idCategoria,producto.nombre,producto.unidad,producto.precio))
             cnx.commit()
             cursor.close()
             cnx.close()
@@ -31,24 +33,24 @@ class CategoriasDao(dao):
                 print(err)
             return False
     
-    def consultar(self,idCategoria):
-        """ Se consultan datos de un usuario mediante correo y contraseña
-        Parámetros
-        email --- correo registrado del usuario
-        password --- contraseña del usuario
+    def consultar(self,idProducto):
+        """ Se consultan datos de un producto
+        Parámetros:
+
+        idProducto --- que es el id del producto en la base de datos
         """
         try:
             cnx = super().connectDB()
             cursor = cnx.cursor()
-            sql = "select * from CATEGORIA where idCATEGORIA="+idCategoria+";"
+            sql = "select * from PRODUCTO where idPRODUCTO="+str(idProducto)+";"
             cursor.execute(sql)
-            categoria=None
+            producto=None
             for row in cursor:
-                categoria = Categoria(row[1],row[2])
-                categoria.idCategoria=row[0]
+                producto = Producto(row[1],row[2],row[3],row[4],row[5])
+                producto.idProducto=row[0]
             cursor.close()
             cnx.close()
-            return categoria
+            return producto
         except mysql.connector.Error as err:
             if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
                 print("Something is wrong with your user name or password")
@@ -56,15 +58,17 @@ class CategoriasDao(dao):
                 print("Database does not exist")
             return None
 
-    def actualizar(self,categoria):
-        """Actualizar categoria
+    def actualizar(self,producto):
+        """Actualizar producto
+
         Parámetros:
-        categoria --- Categoría a actualizar
+        
+        producto -- producto a actualizar
         """
         try:
             cnx = super().connectDB()
             cursor = cnx.cursor()
-            sql = "update CATEGORIA set nombre="+categoria.nombre+", imagen="+categoria.imagen+" where idCategoria="+str(categoria.idCategoria)+" ; "
+            sql = "update PRODUCTO set CATEGORIA_idCATEGORIA="+str(producto.idCategoria)+",nombre="+producto.nombre+", imagen ="+producto.imagen+", unidad="+producto.unidad+", precio="+str(producto.precio)+" where idProducto = "+str(producto.idProducto)+";"
             cursor.execute(sql)
             cnx.commit()
             cursor.close()
@@ -76,15 +80,17 @@ class CategoriasDao(dao):
             elif err.errno == errorcode.ER_BAD_DB_ERROR:
                 print("Database does not exist")
             return False
-    def eliminar(self,categoria):
+    def eliminar(self,producto):
         """Eliminar
+
         Parámetros:
+        
         categoria --- Categoría a actualizar
         """
         try:
             cnx = super().connectDB()
             cursor = cnx.cursor()
-            sql = "delete from CATEGORIA where idCATEGORIA="+str(categoria.idCategoria)+"; "
+            sql = "delete from PRODUCTO where idPRODUCTO="+str(producto.idProducto)+"; "
             cursor.execute(sql)
             cnx.commit()
             cursor.close()
@@ -99,16 +105,16 @@ class CategoriasDao(dao):
     def listarTodos(self):
         """Lista todas las categorías almacenadas en la base de datos 
         """
-        categorias=[]
+        productos=[]
         try:
             cnx = super().connectDB()
             cursor = cnx.cursor()
-            sql = "select * from CATEGORIA;"
+            sql = "select * from PRODUCTO;"
             cursor.execute(sql)
             for row in cursor:
-                categoria=Categoria(row[1],row[2])
-                categoria.idCategoria=row[0]
-                categorias.append(categoria)
+                producto = Producto(row[1],row[2],row[3],row[4],row[5])
+                producto.idProducto=row[0]
+                productos.append(Producto)
             cursor.close()
             cnx.close()
         except mysql.connector.Error as err:
@@ -119,4 +125,28 @@ class CategoriasDao(dao):
             else:
                 print(err)
             return None
-        return categorias
+        return productos
+    def consultarPorCategoria(self,idCategoria):
+        """Consulta productos por categoria
+        """
+        productos=[]
+        try:
+            cnx = super().connectDB()
+            cursor = cnx.cursor()
+            sql = "select * from PRODUCTO where CATEGORIA_idCATEGORIA="+str(idCategoria)+";"
+            cursor.execute(sql)
+            for row in cursor:
+                producto = Producto(row[1],row[2],row[3],row[4],row[5])
+                producto.idProducto=row[0]
+                productos.append(Producto)
+            cursor.close()
+            cnx.close()
+        except mysql.connector.Error as err:
+            if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
+                print("Something is wrong with your user name or password")
+            elif err.errno == errorcode.ER_BAD_DB_ERROR:
+                print("Database does not exist")
+            else:
+                print(err)
+            return None
+        return productos

@@ -16,24 +16,24 @@ if os.environ['REQUEST_METHOD']=="POST":
     dao=CategoriasDao()
     categoria = Categoria(datos.getvalue('nombre'),datos.getvalue('imagen'))
     if dao.registrar(categoria):
-        print('{"tipo":"OK",mensaje:"Categoría creada"}')
+        print(json.dumps('{"tipo":"OK",mensaje:"Categoría creada"}'))
     else:
-        print('{"tipo":"error", "mensaje":"error al crear la categoria"}')
+        print(json.dumps('{"tipo":"error", "mensaje":"error al crear la categoria"}'))
 
 elif os.environ['REQUEST_METHOD']=="PUT":
     dao=CategoriasDao()
     categoria = dao.consultar(datos.getvalue('id'))
     if categoria is None:
-        print('{"tipo":"error", "mensaje":"Esa categoría no existe"}')
+        print(json.dumps('{"tipo":"error", "mensaje":"Esa categoría no existe"}'))
     else:
         if datos.getvalue('nombre') is not None:
             categoria.nombre = datos.getvalue('nombre')
         if datos.getvalue('imagen') is not None:
             categoria.imagen = datos.getvalue('imagen')
         if dao.actualizar(categoria):
-            print('{"tipo":"OK", "mensaje":"Categoría creada"}')
+            print(json.dumps('{"tipo":"OK", "mensaje":"Categoría actualizada"}'))
         else:
-            print('{"tipo":"error", "mensaje":"error al actualizar la categoria"}')
+            print(json.dumps('{"tipo":"error", "mensaje":"error al actualizar la categoria"}'))
 elif os.environ['REQUEST_METHOD']=="DELETE":
     dao=CategoriasDao()
     categoria = dao.consultar(datos.getvalue('id'))
@@ -41,9 +41,9 @@ elif os.environ['REQUEST_METHOD']=="DELETE":
         print(json.dumps('{"tipo":"error", "mensaje":"Esa categoría no existe"}'))
     else:
         if dao.eliminar(categoria):
-            print('{"tipo":"OK", "mensaje":"Categoría eliminada"}')
+            print(json.dumps('{"tipo":"OK", "mensaje":"Categoría eliminada"}'))
         else:
-            print('{"tipo":"error", "mensaje":"error al eliminar la categoria"}')
+            print(json.dumps('{"tipo":"error", "mensaje":"error al eliminar la categoria"}'))
 
 elif os.environ['REQUEST_METHOD']=="GET":
     dao=CategoriasDao()

@@ -3,6 +3,7 @@ import mysql.connector
 from mysql.connector import errorcode
 from dao.UsuariosDao import UsuariosDao
 from dao.models import Usuario
+import json
 import cgi
 import os
 
@@ -15,6 +16,6 @@ if os.environ['REQUEST_METHOD']=="POST":
     dao=UsuariosDao()
     usuario = dao.consultar(email,contraseña)
     if(usuario is not None):
-        print('{"tipo":"OK","mensaje":"Bienvenido/a, '+usuario.primerNombre+'"}')
+        print(json.dumps('{"tipo":"OK","mensaje":"Bienvenido/a, '+usuario.primerNombre+'"}'))
     else:
-        print('{"tipo":"error","mensaje":"Usuario o contrasena invlidos"}')
+        print(json.dumps('{"tipo":"error","mensaje":"Usuario o contrasena inválidos"}'))

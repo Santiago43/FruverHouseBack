@@ -21,7 +21,33 @@ class Domiciliario(Persona):
         self.idTienda = idTienda
 
 class Usuario(Persona):
+    """
+    Clase usuario.
+    """
     def __init__(self,cedula,primerNombre, segundoNombre, primerApellido, segundoApellido, email, contraseña,telefono, direccion):
+        """
+        Constructor de Usuario
+
+        Parámetros:
+
+        cedula -- que es la cédula del usuario.
+
+        primerNombre -- que es el primer nombre del usuario
+
+        segundoNombre -- que es el segundo nombre del usuario
+
+        primerApellido -- que es el primer apellido del usuario
+
+        segundoApellido -- que es el segundo apellido del usuario
+
+        email -- que es el correo electrónico del usuario
+
+        contraseña -- que es la contraseña de acceso del usuario
+
+        teléfono -- que es el teléfono del usuario
+
+        direccion -- que es la direccion del usuario
+        """
         Persona.__init__(self,cedula,primerNombre, segundoNombre, primerApellido, segundoApellido, email, contraseña,telefono, direccion)
 class Tienda:
     def __init__(self,nombre, direccion):
@@ -36,11 +62,12 @@ class Categoria:
         self.imagen=imagen
 
 class Producto:
-    def __init__(self,nombre,unidad,precio,imagen):
+    def __init__(self,idCategoria,nombre,unidad,precio,imagen):
         self.nombre=nombre
         self.unidad=unidad
         self.precio=precio
         self.imagen=imagen
+        self.idCategoria=idCategoria
         self.idProducto=0
 
 class Permiso:
