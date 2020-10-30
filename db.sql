@@ -10,6 +10,7 @@ CREATE TABLE TIENDA (
 
 CREATE TABLE PERSONA (
   idPERSONA VARCHAR(40) NOT NULL,
+  tipoDocumento int NOT NULL,
   primerNombre VARCHAR(40) NULL,
   segundoNombre VARCHAR(40) NULL,
   primerApellido VARCHAR(40) NULL,

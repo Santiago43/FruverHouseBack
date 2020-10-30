@@ -10,7 +10,7 @@ class UsuariosDao(dao):
         try:
             cnx = super().connectDB()
             cursor = cnx.cursor()
-            args=[usuario.cedula,usuario.primerNombre,usuario.segundoNombre,usuario.primerApellido,usuario.segundoApellido,usuario.direccion,usuario.email,usuario.telefono,usuario.contraseña]
+            args=[usuario.documento,usuario.tipoDocumento,usuario.primerNombre,usuario.segundoNombre,usuario.primerApellido,usuario.segundoApellido,usuario.direccion,usuario.email,usuario.telefono,usuario.contraseña]
             cursor.callproc("crearUsuario",args)
             cnx.commit()
             cursor.close()
@@ -21,9 +21,7 @@ class UsuariosDao(dao):
                 print("Something is wrong with your user name or password")
             elif err.errno == errorcode.ER_BAD_DB_ERROR:
                 print("Database does not exist")
-            else:
-                print(err)
-            return False
+            return None
 
     def consultar(self,email,password):
         """
@@ -42,16 +40,17 @@ class UsuariosDao(dao):
             cursor.execute(sql)
             usuario=None
             for row in cursor:
-                cedula=row[0]
-                primerNombre=row[1]
-                segundoNombre=row[2]
-                primerApellido=row[3]
-                segundoApellido=row[4]
-                direccion=row[5]
-                email=row[6]
-                contraseña=row[7]
-                telefono=row[8]
-                usuario=Usuario(cedula,primerNombre,primerApellido,segundoNombre,segundoApellido,direccion,email,contraseña,telefono)
+                documento=row[0]
+                tipoDocumento=row[1]
+                primerNombre=row[2]
+                segundoNombre=row[3]
+                primerApellido=row[4]
+                segundoApellido=row[5]
+                direccion=row[6]
+                email=row[7]
+                contraseña=row[8]
+                telefono=row[9]
+                usuario=Usuario(documento,tipoDocumento,primerNombre,primerApellido,segundoNombre,segundoApellido,direccion,email,contraseña,telefono)
             cursor.close()
             cnx.close()
             return usuario
@@ -71,16 +70,16 @@ class UsuariosDao(dao):
         try:
             cnx = super().connectDB()
             cursor = cnx.cursor()
-            sql = "update PERSONA set primerNombre='"+usuario.primerNombre+"', segundoNombre='"+usuario.segundoNombre+"', primerApellido='"+usuario.primerApellido+"', segundoApellido='"+usuario.segundoApellido+"',direccionResidencia='"+usuario.direccion+"',email='"+usuario.email+"', telefono='"+usuario.telefono+"', contraseña=sha('"+usuario.contraseña+"') where idPERSONA= '"+usuario.cedula+"';"
+            sql = "update PERSONA set tipoDocumento='"+usuario.tipoDocumento+"'primerNombre='"+usuario.primerNombre+"', segundoNombre='"+usuario.segundoNombre+"', primerApellido='"+usuario.primerApellido+"', segundoApellido='"+usuario.segundoApellido+"',direccionResidencia='"+usuario.direccion+"',email='"+usuario.email+"', telefono='"+usuario.telefono+"', contraseña=sha('"+usuario.contraseña+"') where idPERSONA= '"+usuario.cedula+"';"
             cursor.execute(sql)
             cnx.commit()
             cursor.close()
             cnx.close()
-            return usuario
+            return True
         except mysql.connector.Error as err:
             if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
                 print("Something is wrong with your user name or password")
             elif err.errno == errorcode.ER_BAD_DB_ERROR:
                 print("Database does not exist")
-            return None
+            return False
     

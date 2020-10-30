@@ -1,5 +1,5 @@
 class Persona:
-    def __init__(self,cedula,primerNombre, segundoNombre, primerApellido, segundoApellido, email, contraseña,telefono, direccion):
+    def __init__(self,documento,tipoDocumento,primerNombre, segundoNombre, primerApellido, segundoApellido, email, contraseña,telefono, direccion):
         self.primerNombre=primerNombre
         self.segundoNombre=segundoNombre
         self.primerApellido=primerApellido
@@ -8,29 +8,34 @@ class Persona:
         self.contraseña=contraseña
         self.telefono=telefono
         self.direccion=direccion
-        self.cedula=cedula
+        self.documento=documento
+        self.tipoDocumento=tipoDocumento
+    def __hash__(self):
+        return hash(self.email)
     
 class Administrador(Persona):
-    def __init__(self,cedula,primerNombre, segundoNombre, primerApellido, segundoApellido, email, contraseña,telefono, direccion,permisos):
-        Persona.__init__(self,cedula,primerNombre, segundoNombre, primerApellido, segundoApellido, email, contraseña,telefono, direccion)
+    def __init__(self,documento,tipoDocumento,primerNombre, segundoNombre, primerApellido, segundoApellido, email, contraseña,telefono, direccion,permisos):
+        Persona.__init__(self,documento,tipoDocumento,primerNombre, segundoNombre, primerApellido, segundoApellido, email, contraseña,telefono, direccion)
         self.permisos=permisos
 
 class Domiciliario(Persona):
-    def __init__(self,cedula,primerNombre, segundoNombre, primerApellido, segundoApellido, email, contraseña,telefono, direccion,idTienda):
-        Persona.__init__(self,cedula,primerNombre, segundoNombre, primerApellido, segundoApellido, email, contraseña,telefono, direccion)
+    def __init__(self,documento,tipoDocumento,primerNombre, segundoNombre, primerApellido, segundoApellido, email, contraseña,telefono, direccion,idTienda):
+        Persona.__init__(self,documento,tipoDocumento,primerNombre, segundoNombre, primerApellido, segundoApellido, email, contraseña,telefono, direccion)
         self.idTienda = idTienda
 
 class Usuario(Persona):
     """
     Clase usuario.
     """
-    def __init__(self,cedula,primerNombre, segundoNombre, primerApellido, segundoApellido, email, contraseña,telefono, direccion):
+    def __init__(self,documento,tipoDocumento,primerNombre, segundoNombre, primerApellido, segundoApellido, email, contraseña,telefono, direccion):
         """
         Constructor de Usuario
 
         Parámetros:
 
-        cedula -- que es la cédula del usuario.
+        documento -- que es el número de identificación del usuario.
+
+        tipoDocumento -- que es el tipo de documento del usuario
 
         primerNombre -- que es el primer nombre del usuario
 
@@ -48,7 +53,7 @@ class Usuario(Persona):
 
         direccion -- que es la direccion del usuario
         """
-        Persona.__init__(self,cedula,primerNombre, segundoNombre, primerApellido, segundoApellido, email, contraseña,telefono, direccion)
+        Persona.__init__(self,documento,tipoDocumento,primerNombre, segundoNombre, primerApellido, segundoApellido, email, contraseña,telefono, direccion)
 class Tienda:
     def __init__(self,nombre, direccion):
         self.idTienda=0

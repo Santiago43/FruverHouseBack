@@ -19,10 +19,11 @@ if os.environ['REQUEST_METHOD']=="POST":
     email=datos.getvalue('email')
     telefono=datos.getvalue('telefono')
     contraseña =datos.getvalue('contra')
-    cedula=datos.getvalue('cedula')
+    documento=datos.getvalue('cedula')
+    tipoDocumento=datos.getvalue('tipoDocumento')
     direccion=datos.getvalue('direccion')
 
-    usuario=Usuario(cedula,primerNombre,segundoNombre,primerApellido,segundoApellido,email,contraseña,telefono,direccion)
+    usuario=Usuario(documento,tipoDocumento,primerNombre,segundoNombre,primerApellido,segundoApellido,email,contraseña,telefono,direccion)
     dao=UsuariosDao()
     if(dao.consultar(email,contraseña) is None):
         if(dao.registrar(usuario)):

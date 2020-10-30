@@ -1,0 +1,111 @@
+Crear producto.     dirección: /producto.py    
+formato: 
+{
+    idCategoria: id de la Categoría, 
+    nombre: nombre del producto,
+    unidad: unidad en kilogramo, libra, unidad, paquete, etc.
+    precio: precio del produco por la unidad mencionada
+    imagen: link de la imagen
+}
+
+respuesta:
+{
+    tipo: Ok,
+    mensaje: categoria creada
+}
+
+respuesta si hay error:
+{
+    tipo: error,
+    mensaje: mensaje de error
+}
+
+método POST
+
+
+
+Actualizar producto.          dirección /producto.py
+
+formato:
+{
+    idProducto: id del producto,
+    idCategoria: id de la categoria,
+    nombre: nombre del producto, 
+    unidad: unidad del producto,
+    precio: precio por unidad del producto,
+    imagen: link de la imagen
+}
+
+respuesta:
+{
+    tipo: OK,
+    mensaje: categoria actualizada
+}
+
+respuesta si hay error:
+{
+    tipo: error,
+    mensaje: mensaje de error
+}
+
+Método PUT
+
+
+eliminar producto.          dirección /producto.py
+
+formato:
+{
+    idProducto: id del producto
+}
+
+respuesta:
+{
+    tipo: OK,
+    mensaje: producto eliminado
+}
+
+respuesta si hay error:
+{
+    tipo: error,
+    mensaje: mensaje de error
+}
+
+Método DELETE
+
+===================
+obtener productos.          dirección /producto.py
+
+formato: ninguno
+
+respuesta:
+Arreglo de productos
+
+respuesta si hay error:
+{
+    tipo: error,
+    mensaje: mensaje de error
+}
+
+Método GET
+
+
+
+==========================
+
+obtener productos por id de categoría.          dirección /producto.py
+
+formato: 
+{
+    idCategoria: id de la categoria
+}
+
+respuesta:
+Arreglo de productos de dicha categoria
+
+respuesta si hay error:
+{
+    tipo: error,
+    mensaje: mensaje de error
+}
+
+Método GET

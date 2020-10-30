@@ -1,1 +1,1 @@
-delete from CATEGORIA where idCATEGORIA=1;
+delete from CATEGORIA where idCATEGORIA=2;
