@@ -16,4 +16,6 @@ insert into permiso (nombrePermiso) values ("Crear domiciliario");
 insert into permiso (nombrePermiso) values ("Modificar administrador");
 insert into permiso (nombrePermiso) values ("Modificar domiciliario");
 
-call crearAdministrador('12345',1,'Antonio','','Perez','','Callefalsa123','antonio@example.com','2345678765',sha('1234'))
+call crearAdministrador('12345',1,'Antonio','','Perez','','Callefalsa123','antonio@example.com','2345678765',sha('1234'));
+insert into ADMINISTRADOR_has_PERMISO (ADMINISTRADOR_PERSONA_idPERSONA,PERMISO_idPERMISO) 
+values ('12345',1);
