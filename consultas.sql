@@ -11,9 +11,9 @@ inner join DOMICILIARIO as d on p.idPERSONA=d.PERSONA_idPERSONA;
 delete from USUARIO where PERSONA_idPERSONA='1234';
 delete from PERSONA where idPERSONA='1234';
 
-select * from categoria where idCATEGORIA=1;
+select * from CATEGORIA where idCATEGORIA=1;
 
-select * from producto where idPRODUCTO=1;
+select * from PRODUCTO where idPRODUCTO=1;
 
 select p.nombrePermiso from PERMISO as p 
 inner join ADMINISTRADOR_has_PERMISO as ap on p.idPERMISO=ap.PERMISO_idPERMISO

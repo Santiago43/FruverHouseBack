@@ -114,7 +114,7 @@ class ProductosDao(dao):
             for row in cursor:
                 producto = Producto(row[1],row[2],row[3],row[4],row[5])
                 producto.idProducto=row[0]
-                productos.append(Producto)
+                productos.append(producto)
             cursor.close()
             cnx.close()
         except mysql.connector.Error as err:
@@ -138,7 +138,7 @@ class ProductosDao(dao):
             for row in cursor:
                 producto = Producto(row[1],row[2],row[3],row[4],row[5])
                 producto.idProducto=row[0]
-                productos.append(Producto)
+                productos.append(producto)
             cursor.close()
             cnx.close()
         except mysql.connector.Error as err:
