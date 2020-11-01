@@ -55,7 +55,7 @@ elif os.environ['REQUEST_METHOD']=="GET":
     else:
         productos = dao.consultarPorCategoria(idCategoria)
     print("[")
-    longitud=len(producto)
+    longitud=len(productos)
     i=1
     for producto in productos:
         print(json.dumps(producto.__dict__))
