@@ -21,6 +21,8 @@ class UsuariosDao(dao):
                 print("Something is wrong with your user name or password")
             elif err.errno == errorcode.ER_BAD_DB_ERROR:
                 print("Database does not exist")
+            else:
+                print(err)
             return False
 
     def consultar(self,email,password):
