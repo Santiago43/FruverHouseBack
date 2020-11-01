@@ -16,7 +16,7 @@ class CategoriasDao(dao):
         try:
             cnx = super().connectDB()
             cursor = cnx.cursor()
-            sql = "insert into categoria (nombre,imagen) values ('"+categoria.nombre+"','"+categoria.imagen+"');"
+            sql = "insert into CATEGORIA (nombre,imagen) values ('"+categoria.nombre+"','"+categoria.imagen+"');"
             cursor.execute(sql)
             cnx.commit()
             cursor.close()
