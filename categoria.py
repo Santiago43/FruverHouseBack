@@ -22,7 +22,7 @@ if os.environ['REQUEST_METHOD']=="POST":
 
 elif os.environ['REQUEST_METHOD']=="PUT":
     dao=CategoriasDao()
-    categoria = dao.consultar(datos.getvalue('id'))
+    categoria = dao.consultar(datos.getvalue('idCategoria'))
     if categoria is None:
         print(json.dumps('{"tipo":"error", "mensaje":"Esa categoría no existe"}'))
     else:
@@ -36,7 +36,7 @@ elif os.environ['REQUEST_METHOD']=="PUT":
             print(json.dumps('{"tipo":"error", "mensaje":"error al actualizar la categoria"}'))
 elif os.environ['REQUEST_METHOD']=="DELETE":
     dao=CategoriasDao()
-    categoria = dao.consultar(datos.getvalue('id'))
+    categoria = dao.consultar(datos.getvalue('idCategoria'))
     if categoria is None:
         print(json.dumps('{"tipo":"error", "mensaje":"Esa categoría no existe"}'))
     else:
