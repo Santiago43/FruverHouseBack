@@ -43,7 +43,7 @@ elif os.environ['REQUEST_METHOD']=="DELETE":
         print(json.dumps('{"tipo":"error", "mensaje":"Esa categoría no existe"}'))
     else:
         if dao.eliminar(producto):
-            print(json.dumps('{"tipo":"OK", "mensaje":"Categoría eliminada"}'))
+            print(json.dumps('{"tipo":"OK", "mensaje":"Producto eliminada"}'))
         else:
             print(json.dumps('{"tipo":"error", "mensaje":"error al eliminar la categoria"}'))
 
