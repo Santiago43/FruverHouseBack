@@ -21,7 +21,7 @@ if os.environ['REQUEST_METHOD']=="POST":
         print(json.dumps('{"tipo":"error", "mensaje":"error al crear la categoria"}'))
 
 elif os.environ['REQUEST_METHOD']=="PUT":
-    producto = dao.consultar(datos.getvalue('id'))
+    producto = dao.consultar(datos.getvalue('idProducto'))
     if producto is None:
         print(json.dumps('{"tipo":"error", "mensaje":"Ese producto no existe"}'))
     else:
@@ -38,9 +38,9 @@ elif os.environ['REQUEST_METHOD']=="PUT":
         else:
             print(json.dumps('{"tipo":"error", "mensaje":"error al actualizar el producto"}'))
 elif os.environ['REQUEST_METHOD']=="DELETE":
-    producto = dao.consultar(datos.getvalue('id'))
+    producto = dao.consultar(datos.getvalue('idProducto'))
     if producto is None:
-        print(json.dumps('{"tipo":"error", "mensaje":"Esa categoría no existe"}'))
+        print(json.dumps('{"tipo":"error", "mensaje":"Ese producto no existe"}'))
     else:
         if dao.eliminar(producto):
             print(json.dumps('{"tipo":"OK", "mensaje":"Producto eliminado"}'))
