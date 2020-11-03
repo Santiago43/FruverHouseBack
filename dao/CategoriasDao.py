@@ -64,8 +64,8 @@ class CategoriasDao(dao):
         try:
             cnx = super().connectDB()
             cursor = cnx.cursor()
-            sql = "update CATEGORIA set nombre="+categoria.nombre+", imagen="+categoria.imagen+" where idCategoria="+str(categoria.idCategoria)+" ; "
-            cursor.execute(sql)
+            sql = "update CATEGORIA set nombre=%s, imagen=%s where idCategoria=%s ; "
+            cursor.execute(sql,(categoria.nombre,categoria.imagen,categoria.idCategoria))
             cnx.commit()
             cursor.close()
             cnx.close()
