@@ -68,8 +68,8 @@ class ProductosDao(dao):
         try:
             cnx = super().connectDB()
             cursor = cnx.cursor()
-            sql = "update PRODUCTO set CATEGORIA_idCATEGORIA="+str(producto.idCategoria)+",nombre="+producto.nombre+", imagen ="+producto.imagen+", unidad="+producto.unidad+", precio="+str(producto.precio)+" where idProducto = "+str(producto.idProducto)+";"
-            cursor.execute(sql)
+            sql = "update PRODUCTO set CATEGORIA_idCATEGORIA=%s,nombre=%s, imagen =%s, unidad=%s, precio=%s where idProducto = %s;"
+            cursor.execute(sql,(producto.idCategoria,producto.nombre,producto.imagen,producto.unidad,producto.precio,producto.idProducto))
             cnx.commit()
             cursor.close()
             cnx.close()
