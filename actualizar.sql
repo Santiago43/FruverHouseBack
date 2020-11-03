@@ -1,6 +1,6 @@
 update CATEGORIA
-set nombre='Tubérculo', imagen='https://totalsaludable.com/wp-content/uploads/2020/06/Tub%C3%A9rculos-1-750x450.jpg'
-where idCategoria=1 ; 
+set nombre='Hortalizas', imagen='https://www.ejemplos.co/wp-content/uploads/2018/11/Hortalizas-e1543613569254.jpg'
+where idCategoria=2 ; 
 
 update PERSONA
 set primerNombre='Antonio', segundoNombre='', primerApellido='Pérez', segundoApellido='Ortiz',direccionResidencia='Calle 43',email='antonio@gmail.com', telefono='320890', contraseña=sha('123')

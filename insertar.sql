@@ -5,8 +5,8 @@ select * from PERSONA;
 
 call crearUsuario('12345','Antonio','','Perez','','Callefalsa123','antonio@example.com','2345678765',sha('1234'));
 
-insert into categoria (nombre,imagen) values ('Tubérculos','/imagen/img.jpg');
-insert into categoria (nombre,imagen) values ('Hortalizas','/imagen/img.jpg');
+insert into CATEGORIA (nombre,imagen) values ('Tubérculos','/imagen/img.jpg');
+insert into CATEGORIA (nombre,imagen) values ('Hortalizas','/imagen/img.jpg');
 
 insert into PRODUCTO (CATEGORIA_idCATEGORIA,nombre,unidad,precio,imagen) 
 values (1,"Papa pastusa","libra",500,"/imagen/img.jpg");

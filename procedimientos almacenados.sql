@@ -15,7 +15,7 @@ in _contraseña varchar(200)
 )
 begin
 insert into PERSONA (idPERSONA,tipoDocumento,primerNombre,segundoNombre,primerApellido,segundoApellido, direccionResidencia,email,telefono,contraseña) 
-values(_cedula,_tipoDocumento,_primerNombre,_segundoNombre,_primerApellido,_segundoApellido,_direccionResidencia,_email,_telefono,sha(_contraseña));
+values(_documento,_tipoDocumento,_primerNombre,_segundoNombre,_primerApellido,_segundoApellido,_direccionResidencia,_email,_telefono,sha(_contraseña));
 insert into USUARIO (PERSONA_idPERSONA)values (_documento);
 end $$
 #drop procedure crearUsuario;
