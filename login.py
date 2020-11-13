@@ -8,7 +8,9 @@ from dao.models import Usuario
 import json
 import cgi
 import os
-
+"""
+Archivo de login: permite al usuario dar paso a la página como usuario autenticado
+"""
 print('Content-Type: text/json')
 print('')
 datos= cgi.FieldStorage()
