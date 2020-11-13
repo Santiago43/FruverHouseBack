@@ -24,10 +24,10 @@ if os.environ['REQUEST_METHOD']=="POST":
     admin = admindao.consultar(email,contraseña)
     domiciliario=domiciliarioDao.consultar(email,contraseña)
     if(usuario is not None):
-        print(json.dumps('{"tipo":"OK","mensaje":"Bienvenido/a, '+usuario.primerNombre+'","usuario":"'+json.dumps(usuario.__dict__)+'"}'))
+        print(json.dumps('{"tipo":"OK","mensaje":"Bienvenido/a, '+usuario.primerNombre+'","usuario":'+json.dumps(usuario.__dict__)+'}'))
     elif(domiciliario is not None):
-        print(json.dumps('{"tipo":"OK","mensaje":"Bienvenido/a, '+domiciliario.primerNombre+'","usuario":"'+json.dumps(domiciliario.__dict__)+'"}'))
+        print(json.dumps('{"tipo":"OK","mensaje":"Bienvenido/a, '+domiciliario.primerNombre+'","usuario":'+json.dumps(domiciliario.__dict__)+'}'))
     elif (admin is not None):
-        print(json.dumps('{"tipo":"OK","mensaje":"Bienvenido/a, '+admin.primerNombre+'","usuario":"'+json.dumps(admin.__dict__)+'"}'))
+        print(json.dumps('{"tipo":"OK","mensaje":"Bienvenido/a, '+admin.primerNombre+'","usuario":'+json.dumps(admin.__dict__)+'}'))
     else:
         print(json.dumps('{"tipo":"error","mensaje":"Usuario o contrasena inválidos"}'))
