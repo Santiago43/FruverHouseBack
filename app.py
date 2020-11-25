@@ -25,7 +25,7 @@ def compra():
         post_data = request.get_json()
         response_object['message'] = 'Book added!'
     else:
-        continue
+        print("Hola")
     return jsonify(response_object)
 
 if __name__ == '__main__':
