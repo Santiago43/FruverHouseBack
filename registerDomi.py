@@ -22,7 +22,7 @@ if os.environ['REQUEST_METHOD']=="POST":
     documento=datos.getvalue('documento')
     tipoDocumento=datos.getvalue('tipoDocumento')
     direccion=datos.getvalue('direccion')
-    permisos=datos.getvalue('permisos')
+    permisos = datos.getvalue('permisos')
 
     administrador=Administrador(documento,tipoDocumento,primerNombre,segundoNombre,primerApellido,segundoApellido,email,contraseña,telefono,direccion,permisos)
     dao=AdminDao()

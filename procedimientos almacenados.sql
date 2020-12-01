@@ -21,7 +21,7 @@ end $$
 #drop procedure crearUsuario;
 
 
-/*Crear usuario*/
+/*Crear admin*/
 delimiter $$
 
 create procedure crearAdministrador (
