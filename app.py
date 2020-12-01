@@ -22,7 +22,7 @@ def admin():
 def compra():
     response_object = {'status': 'success'}
     if request.method == 'POST':
-        car_items=request.args.get('data')
+        car_items=request.get_json()
         print(car_items)
         return jsonify("ajá")
     else:
