@@ -22,11 +22,10 @@ def admin():
 def compra():
     response_object = {'status': 'success'}
     if request.method == 'POST':
-        post_data = request.get_json()
-        response_object['message'] = 'Book added!'
+        print(request.args.getlist())
+        return jsonify("ajá")
     else:
-        print("Hola")
-    return jsonify(response_object)
+        return jsonify(response_object)
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0")
