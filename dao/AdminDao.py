@@ -91,4 +91,45 @@ class AdminDao(dao):
             elif err.errno == errorcode.ER_BAD_DB_ERROR:
                 print("Database does not exist")
             return False
-    
+
+    def consultarPorId(self,documento):
+        """
+        Método encargado de consultar los datos de un administrador a partir de su número de documento.
+
+        Parámetros:
+
+        documento -- que es el número de documento del administrador
+        """
+        try:
+            cnx = super().connectDB()
+            cursor = cnx.cursor()
+            sql = "select p.* from PERSONA as p inner join administrador as a on p.idPERSONA=a.PERSONA_idPERSONA where p.idPERSONA='"+documento+"';"
+            cursor.execute(sql)
+            administrador=None
+            for row in cursor:
+                documento=row[0]
+                tipoDocumento=row[1]
+                primerNombre=row[2]
+                segundoNombre=row[3]
+                primerApellido=row[4]
+                segundoApellido=row[5]
+                direccion=row[6]
+                email=row[7]
+                contraseña=row[8]
+                telefono=row[9]
+                administrador=Administrador(documento,tipoDocumento,primerNombre,primerApellido,segundoNombre,segundoApellido,direccion,email,contraseña,telefono,None)
+            sql2= "select p.nombrePermiso from PERMISO as p inner join ADMINISTRADOR_has_PERMISO as ap on p.idPERMISO=ap.PERMISO_idPERMISO inner join ADMINISTRADOR as a on ap.ADMINISTRADOR_PERSONA_idPERSONA=a.PERSONA_idPERSONA where a.PERSONA_idPERSONA='"+administrador.documento+"'"
+            cursor.execute(sql2)
+            permisos = []
+            for row in cursor:
+                permisos.append(row[0])
+            administrador.permisos=permisos
+            cursor.close()
+            cnx.close()
+            return administrador
+        except mysql.connector.Error as err:
+            if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
+                print("Something is wrong with your user name or password")
+            elif err.errno == errorcode.ER_BAD_DB_ERROR:
+                print("Database does not exist")
+            return None
