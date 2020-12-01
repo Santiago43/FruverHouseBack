@@ -22,6 +22,7 @@ def admin():
 def compra():
     response_object = {'status': 'success'}
     if request.method == 'POST':
+        print(request.args.items())
         print(request.view_args)
         return jsonify("ajá")
     else:
