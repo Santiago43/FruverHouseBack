@@ -2,7 +2,7 @@
 import mysql.connector
 from mysql.connector import errorcode
 from dao.AdminDao import AdminDao
-from dao.models import Administrador
+from dao.models import Domiciliario
 import json
 import cgi
 import os
@@ -22,9 +22,9 @@ if os.environ['REQUEST_METHOD']=="POST":
     documento=datos.getvalue('documento')
     tipoDocumento=datos.getvalue('tipoDocumento')
     direccion=datos.getvalue('direccion')
-    permisos = datos.getvalue('permisos')
+    idTienda = datos.getvalue('idTienda')
 
-    administrador=Administrador(documento,tipoDocumento,primerNombre,segundoNombre,primerApellido,segundoApellido,email,contraseña,telefono,direccion,permisos)
+    administrador=Domiciliario(documento,tipoDocumento,primerNombre,segundoNombre,primerApellido,segundoApellido,email,contraseña,telefono,direccion,idtienda)
     dao=AdminDao()
     if(dao.consultar(email,contraseña) is None):
         if(dao.registrar(administrador)):
