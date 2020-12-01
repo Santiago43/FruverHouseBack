@@ -22,10 +22,10 @@ def admin():
 def compra():
     response_object = {'status': 'success'}
     if request.method == 'POST':
-        print(request.args.getlist())
+        print(request.view_args)
         return jsonify("ajá")
     else:
         return jsonify(response_object)
 
 if __name__ == '__main__':
-    app.run(host="0.0.0.0")
+    app.run(host="0.0.0.0",debug=True)
