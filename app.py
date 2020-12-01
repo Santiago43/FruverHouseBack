@@ -22,6 +22,7 @@ def admin():
 def compra():
     response_object = {'status': 'success'}
     if request.method == 'POST':
+        print(request)
         car_items=request.args.items()
         for (k,v) in car_items:
             print(k,v)
