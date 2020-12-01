@@ -22,11 +22,9 @@ def admin():
 def compra():
     response_object = {'status': 'success'}
     if request.method == 'POST':
-        print(request)
-        car_items=request.args.items()
+        car_items=request.args.get('data')
         for (k,v) in car_items:
             print(k,v)
-        print(request.view_args)
         return jsonify("ajá")
     else:
         return jsonify(response_object)
