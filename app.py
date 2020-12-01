@@ -1,6 +1,8 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 
+from dao.models import ProductoACompra
+
 
 # configuration
 DEBUG = True
@@ -22,9 +24,11 @@ def admin():
 def compra():
     response_object = {'status': 'success'}
     if request.method == 'POST':
-        car_items=request.get_json()
-        print(car_items)
-        return jsonify("ajá")
+        data=request.get_json()
+        items=data.get('data')
+        for i in items:
+            print(i)
+        return jsonify(response_object)
     else:
         return jsonify(response_object)
 
