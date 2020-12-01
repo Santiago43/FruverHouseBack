@@ -81,7 +81,7 @@ class Permiso:
         self.nombrePermiso=nombrePermiso
 
 class Pedido:
-    def __init__(self,codigoPedido,idDomiciliario,idUsuario,direccionDestino,listaProductosACompra):
+    def __init__(self,idDomiciliario,idUsuario,direccionDestino,listaProductosACompra):
         self.codigoPedido = 0
         self.idDomiciliario=idDomiciliario
         self.idUsuario=idUsuario

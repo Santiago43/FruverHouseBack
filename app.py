@@ -3,6 +3,8 @@ from flask_cors import CORS
 
 from dao.models import ProductoACompra
 from dao.UsuariosDao import UsuariosDao
+from dao.PedidosDao import PedidosDao
+from dao.models import Pedido
 
 
 # configuration
@@ -28,11 +30,18 @@ def compra():
         data=request.get_json()
         user=data.get('user')
         items=data.get('data')
+        destino=data.get('direccion')
         productosEnLista = []
         for i in items:
             productoEnPedido = ProductoACompra(i['idProducto'],i['cantidad']) 
             productosEnLista.append(productoEnPedido)
-                
+        pedido = Pedido(0,user,destino,productosEnLista)
+        pedidoDao = PedidosDao()
+        if pedidoDao.registrar(pedido):
+            response_object['mensaje']='Compra realizada. Un domiciliario tomará el pedido'
+        else:
+            response_object['mensaje']='Error al realizar el pedido'
+            response_object['status']='error'
         return jsonify(response_object)
     else:
         return jsonify(response_object)
