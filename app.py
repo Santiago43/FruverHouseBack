@@ -27,6 +27,7 @@ def admin():
     response_object = {'tipo': 'OK'}
     if request.method=="POST":
         data=request.get_json()
+        print(data)
         primerNombre=data.get('n1')
         segundoNombre=data.get('n2')
         primerApellido=data.get('a1')
