@@ -103,14 +103,11 @@ def compra():
     else:
         return jsonify(response_object)
 
-@app.route('/user', methods=['GET'])
-def user():
+@app.route('/user/<user_id>', methods=['GET'])
+def user(user_id):
     response_object = {'status': 'success'}
-    data=request.get_json()
-    print(request)
-    user=data.get('user')
     uDao = UsuariosDao()
-    usuario = uDao.consultarPorId(user)
+    usuario = uDao.consultarPorId(user_id)
     response_object['usuario']=usuario.__dict__
     return jsonify(response_object)
 
