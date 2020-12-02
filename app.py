@@ -107,7 +107,7 @@ def compra():
 def user():
     response_object = {'status': 'success'}
     data=request.get_json()
-    print(data)
+    print(request)
     user=data.get('user')
     uDao = UsuariosDao()
     usuario = uDao.consultarPorId(user)
