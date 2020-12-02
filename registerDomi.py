@@ -1,8 +1,8 @@
 #!/usr/bin/python3
 import mysql.connector
 from mysql.connector import errorcode
-from dao.AdminDao import AdminDao
-from dao.models import Administrador
+from dao.DomiciliarioDao import DomiciliarioDao
+from dao.models import Domiciliario
 import json
 import cgi
 import os
@@ -22,14 +22,14 @@ if os.environ['REQUEST_METHOD']=="POST":
     documento=datos.getvalue('documento')
     tipoDocumento=datos.getvalue('tipoDocumento')
     direccion=datos.getvalue('direccion')
-    permisos=datos.getvalue('permisos')
+    idTienda = datos.getvalue('idTienda')
 
-    administrador=Administrador(documento,tipoDocumento,primerNombre,segundoNombre,primerApellido,segundoApellido,email,contraseña,telefono,direccion,permisos)
-    dao=AdminDao()
+    domiciliario=Domiciliario(documento,tipoDocumento,primerNombre,segundoNombre,primerApellido,segundoApellido,email,contraseña,telefono,direccion,idTienda)
+    dao=DomiciliarioDao()
     if(dao.consultar(email,contraseña) is None):
-        if(dao.registrar(administrador)):
-            print(json.dumps('{"tipo":"OK","mensaje":"administrador creado"}'))
+        if(dao.registrar(domiciliario)):
+            print(json.dumps('{"tipo":"OK","mensaje":"domiciliario creado"}'))
         else:
-            print(json.dumps('{"tipo":"error","mensaje":"Error al crear administrador"}'))
+            print(json.dumps('{"tipo":"error","mensaje":"Error al crear domiciliario"}'))
     else:
-        print(json.dumps('{"tipo":"error","mensaje":"Ya existe un administrador con esa identificación o con ese correo"}'))
+        print(json.dumps('{"tipo":"error","mensaje":"Ya existe un domiciliario con esa identificación o con ese correo"}'))
