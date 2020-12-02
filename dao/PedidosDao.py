@@ -7,11 +7,15 @@ class PedidosDao(dao):
         try:
             cnx = super().connectDB()
             cursor = cnx.cursor()
-            args=[]
-            cursor.callproc("crearAdministrador",args)
-            for permiso in administrador.permisos:
-                sql = "insert into ADMINISTRADOR_has_PERMISO (ADMINISTRADOR_PERSONA_idPERSONA,PERMISO_idPERMISO)  values (%s,%s);"
-                cursor.execute(sql,(administrador.documento,permiso))
+            sql = "insert into PEDIDO (USUARIO_PERSONA_idPERSONA,direccionDestino) values (%s,%s);"
+            cursor.execute(sql,(pedido.idUsuario,pedido.direccionDestino))
+            cnx.commit()
+            sql2="select codigoPedido from PEDIDO order by codigoPedido desc limit 1;"
+            cursor.execute(sql)
+            codigoPedido = cursor.fetchone()
+            for producto in pedido.listaProductosACompra:
+                sql = "insert into PEDIDO_has_PRODUCTO (PEDIDO_codigoPedido,PRODUCTO_idPRODUCTO,cantidad)values (%s,%s,%s);"
+                cursor.execute(sql,(codigoPedido,producto.producto,producto.cantidad))
             cnx.commit()
             cursor.close()
             cnx.close()
@@ -21,4 +25,4 @@ class PedidosDao(dao):
                 print("Something is wrong with your user name or password")
             elif err.errno == errorcode.ER_BAD_DB_ERROR:
                 print("Database does not exist")
-            return None
+            return False
