@@ -1,10 +1,12 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 
-from dao.models import ProductoACompra
 from dao.UsuariosDao import UsuariosDao
 from dao.PedidosDao import PedidosDao
-from dao.models import Pedido
+from dao.AdminDao import AdminDao
+from dao.DomiciliarioDao import DomiciliarioDao
+from dao.models import Domiciliario, Pedido, ProductoACompra, Administrador
+
 
 
 # configuration
@@ -21,7 +23,61 @@ CORS(app, resources={r'/*': {'origins': '*'}})
 # sanity check route
 @app.route('/admin', methods=['POST','GET'])
 def admin():
-    return jsonify('pong!')
+    response_object = {'tipo': 'OK'}
+    if request.method=="POST":
+        data=request.get_json()
+        primerNombre=data.get('n1')
+        segundoNombre=data.get('n2')
+        primerApellido=data.get('a1')
+        segundoApellido=data.get('a2')
+        email=data.get('email')
+        telefono=data.get('telefono')
+        contraseña =data.get('contra')
+        documento=data.get('documento')
+        tipoDocumento=data.get('tipoDocumento')
+        direccion=data.get('direccion')
+        permisos=data.get('permisos')
+        administrador=Administrador(documento,tipoDocumento,primerNombre,segundoNombre,primerApellido,segundoApellido,email,contraseña,telefono,direccion,permisos)
+        dao=AdminDao()
+        if(dao.consultar(email,contraseña) is None):
+            if(dao.registrar(administrador)):
+                response_object['mensaje']="administrador creado"
+            else:
+                response_object['tipo']="error"
+                response_object['mensaje']="Error al crear administrador"
+        else:
+            response_object['tipo']="error"
+            response_object['mensaje']="Ya existe un administrador con esa identificación o con ese correo"
+        return jsonify(response_object)
+
+@app.route('/domicilio', methods=['POST','GET'])
+def domicilio():
+    response_object = {'tipo': 'OK'}
+    if request.method=="POST":
+        data=request.get_json()
+        primerNombre=data.get('n1')
+        segundoNombre=data.get('n2')
+        primerApellido=data.get('a1')
+        segundoApellido=data.get('a2')
+        email=data.get('email')
+        telefono=data.get('telefono')
+        contraseña =data.get('contra')
+        documento=data.get('documento')
+        tipoDocumento=data.get('tipoDocumento')
+        direccion=data.get('direccion')
+        idTienda = data.get('idTienda')
+        domiciliario=Domiciliario(documento,tipoDocumento,primerNombre,segundoNombre,primerApellido,segundoApellido,email,contraseña,telefono,direccion,idTienda)
+        dao=DomiciliarioDao()
+        if(dao.consultar(email,contraseña) is None):
+            if(dao.registrar(domiciliario)):
+                response_object['mensaje']="domiciliario creado"
+            else:
+                response_object['tipo']="error"
+                response_object['mensaje']="Error al crear domiciliario"
+        else:
+            response_object['tipo']="error"
+            response_object['mensaje']="Ya existe un domiciliario con esa identificación o con ese correo"
+        return jsonify(response_object)
 
 @app.route('/compra', methods=['POST','GET'])
 def compra():
