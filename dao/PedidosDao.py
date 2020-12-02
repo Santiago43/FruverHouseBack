@@ -11,7 +11,7 @@ class PedidosDao(dao):
             cursor.execute(sql,(pedido.idUsuario,pedido.direccionDestino))
             cnx.commit()
             sql2="select codigoPedido from PEDIDO order by codigoPedido desc limit 1;"
-            cursor.execute(sql)
+            cursor.execute(sql2)
             codigoPedido = cursor.fetchone()
             for producto in pedido.listaProductosACompra:
                 sql = "insert into PEDIDO_has_PRODUCTO (PEDIDO_codigoPedido,PRODUCTO_idPRODUCTO,cantidad)values (%s,%s,%s);"
