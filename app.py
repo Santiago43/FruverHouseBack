@@ -108,6 +108,7 @@ def user(user_id):
     response_object = {'status': 'success'}
     uDao = UsuariosDao()
     usuario = uDao.consultarPorId(user_id)
+    usuario.contraseña=""
     response_object['usuario']=usuario.__dict__
     return jsonify(response_object)
 

@@ -110,7 +110,7 @@ class UsuariosDao(dao):
                 email=row[7]
                 contraseña=row[8]
                 telefono=row[9]
-                usuario=Usuario(documento,tipoDocumento,primerNombre,primerApellido,segundoNombre,segundoApellido,direccion,email,contraseña,telefono)
+                usuario=Usuario(documento,tipoDocumento,primerNombre,segundoNombre,primerApellido,segundoNombre,segundoApellido,direccion,email,contraseña,telefono)
             cursor.close()
             cnx.close()
             return usuario
