@@ -5,6 +5,7 @@ from dao.UsuariosDao import UsuariosDao
 from dao.PedidosDao import PedidosDao
 from dao.AdminDao import AdminDao
 from dao.DomiciliarioDao import DomiciliarioDao
+from dao.PermisoDao import PermisoDao
 from dao.models import Domiciliario, Pedido, ProductoACompra, Administrador
 
 
@@ -110,6 +111,17 @@ def user():
     uDao = UsuariosDao()
     usuario = uDao.consultarPorId(user)
     response_object['usuario']=usuario.__dict__
+    return jsonify(response_object)
+
+@app.route('/permisos', methods=['GET'])
+def permisos():
+    response_object = {'status': 'success'}
+    data=request.get_json()
+    permDao = PermisoDao()
+    permisos = permDao.consultarPermisos()
+    for permiso in permisos:
+        permiso = permiso.__dict__
+    response_object['permisos']=permisos
     return jsonify(response_object)
 if __name__ == '__main__':
     app.run(host="0.0.0.0",debug=True)
