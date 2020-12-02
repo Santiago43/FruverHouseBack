@@ -87,13 +87,10 @@ def compra():
         user=data.get('user')
         items=data.get('data')
         destino=data.get('direccion')
-        print(data)
         productosEnLista = []
         for i in items:
             productoEnPedido = ProductoACompra(i['idProducto'],i['cantidad']) 
             productosEnLista.append(productoEnPedido)
-            print(productoEnPedido.__dict__)
-        
         pedido = Pedido(0,user,destino,productosEnLista)
         pedidoDao = PedidosDao()
         if pedidoDao.registrar(pedido):
