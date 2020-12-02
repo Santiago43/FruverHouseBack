@@ -12,7 +12,9 @@ class PedidosDao(dao):
             cnx.commit()
             sql2="select codigoPedido from PEDIDO order by codigoPedido desc limit 1;"
             cursor.execute(sql2)
-            codigoPedido = cursor.fetchone()
+            codigoPedido=0
+            for row in cursor:
+                codigoPedido=row[0]
             for producto in pedido.listaProductosACompra:
                 sql = "insert into PEDIDO_has_PRODUCTO (PEDIDO_codigoPedido,PRODUCTO_idPRODUCTO,cantidad)values (%s,%s,%s);"
                 cursor.execute(sql,(codigoPedido,producto.producto,producto.cantidad))
