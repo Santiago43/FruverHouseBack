@@ -36,7 +36,7 @@ def compra():
         for i in items:
             productoEnPedido = ProductoACompra(i['idProducto'],i['cantidad']) 
             productosEnLista.append(productoEnPedido)
-            print(productoEnPedido)
+            print(productoEnPedido.__dict__)
         print(productosEnLista)
         pedido = Pedido(0,user,destino,productosEnLista)
         pedidoDao = PedidosDao()
