@@ -31,7 +31,7 @@ def compra():
         user=data.get('user')
         items=data.get('data')
         destino=data.get('direccion')
-        print(data)
+        print(destino)
         productosEnLista = []
         for i in items:
             productoEnPedido = ProductoACompra(i['idProducto'],i['cantidad']) 
