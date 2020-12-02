@@ -39,7 +39,7 @@ class AdminDao(dao):
         try:
             cnx = super().connectDB()
             cursor = cnx.cursor()
-            sql = "select p.* from PERSONA as p inner join administrador as a on p.idPERSONA=a.PERSONA_idPERSONA where p.email='"+email+"' and p.contraseña=sha('"+password+"');"
+            sql = "select p.* from PERSONA as p inner join ADMINISTRADOR as a on p.idPERSONA=a.PERSONA_idPERSONA where p.email='"+email+"' and p.contraseña=sha('"+password+"');"
             cursor.execute(sql)
             administrador=None
             for row in cursor:
