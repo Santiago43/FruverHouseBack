@@ -119,9 +119,10 @@ def permisos():
     data=request.get_json()
     permDao = PermisoDao()
     permisos = permDao.consultarPermisos()
+    permisojson=[]
     for permiso in permisos:
-        permiso = permiso.__dict__
-    response_object['permisos']=permisos
+        permisojson.append(permiso.__dict__)
+    response_object['permisos']=permisojson
     return jsonify(response_object)
 if __name__ == '__main__':
     app.run(host="0.0.0.0",debug=True)
