@@ -54,12 +54,13 @@ class AdminDao(dao):
                 contraseña=row[8]
                 telefono=row[9]
                 administrador=Administrador(documento,tipoDocumento,primerNombre,primerApellido,segundoNombre,segundoApellido,direccion,email,contraseña,telefono,None)
-            sql2= "select p.nombrePermiso from PERMISO as p inner join ADMINISTRADOR_has_PERMISO as ap on p.idPERMISO=ap.PERMISO_idPERMISO inner join ADMINISTRADOR as a on ap.ADMINISTRADOR_PERSONA_idPERSONA=a.PERSONA_idPERSONA where a.PERSONA_idPERSONA='"+administrador.documento+"'"
-            cursor.execute(sql2)
-            permisos = []
-            for row in cursor:
-                permisos.append(row[0])
-            administrador.permisos=permisos
+            if administrador is not None:
+                sql2= "select p.nombrePermiso from PERMISO as p inner join ADMINISTRADOR_has_PERMISO as ap on p.idPERMISO=ap.PERMISO_idPERMISO inner join ADMINISTRADOR as a on ap.ADMINISTRADOR_PERSONA_idPERSONA=a.PERSONA_idPERSONA where a.PERSONA_idPERSONA='"+administrador.documento+"'"
+                cursor.execute(sql2)
+                permisos = []
+                for row in cursor:
+                    permisos.append(row[0])
+                administrador.permisos=permisos
             cursor.close()
             cnx.close()
             return administrador
