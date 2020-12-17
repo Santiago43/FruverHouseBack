@@ -30,4 +30,4 @@ if os.environ['REQUEST_METHOD']=="POST":
     elif (admin is not None):
         print(json.dumps('{"tipo":"OK","mensaje":"Bienvenido/a, '+admin.primerNombre+'","usuario":'+json.dumps(admin.__dict__)+'}'))
     else:
-        print(json.dumps('{"tipo":"error","mensaje":"Usuario o contrasena inválidos"}'))
+        print(json.dumps('{"tipo":"error","mensaje":"Usuario o contraseña inválidos"}'))

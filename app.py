@@ -27,7 +27,6 @@ def admin():
     response_object = {'tipo': 'OK'}
     if request.method=="POST":
         data=request.get_json()
-        print(data)
         primerNombre=data.get('n1')
         segundoNombre=data.get('n2')
         primerApellido=data.get('a1')
@@ -51,6 +50,19 @@ def admin():
             response_object['tipo']="error"
             response_object['mensaje']="Ya existe un administrador con esa identificación o con ese correo"
         return jsonify(response_object)
+
+@app.route('/admin/<admin_id>', methods=['GET'])
+def admin_unico(admin_id):
+    response_object = {'tipo': 'OK'}
+    dao=AdminDao()
+    administrador = dao.consultarPorId(admin_id)
+    if(administrador is not None):
+        if(dao.registrar(administrador)):
+            response_object['admin']=administrador.__dict__
+        else:
+            response_object['tipo']="error"
+            response_object['mensaje']="Error al consultar administrador"
+    return jsonify(response_object)
 
 @app.route('/domicilio', methods=['POST','GET'])
 def domicilio():
